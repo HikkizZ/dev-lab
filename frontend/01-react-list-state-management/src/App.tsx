@@ -8,26 +8,26 @@ interface Item {
   text: string;
 }
 
-const INITIAL_ITEMS = [
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: 'VideoGames 🎮'
-  },
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: 'Music 🎵'
-  },
-  {
-    id: crypto.randomUUID(),
-    timestamp: Date.now(),
-    text: 'Podcasts 🎙️'
-  }
-]
+// const INITIAL_ITEMS = [
+//   {
+//     id: crypto.randomUUID(),
+//     timestamp: Date.now(),
+//     text: 'VideoGames 🎮'
+//   },
+//   {
+//     id: crypto.randomUUID(),
+//     timestamp: Date.now(),
+//     text: 'Music 🎵'
+//   },
+//   {
+//     id: crypto.randomUUID(),
+//     timestamp: Date.now(),
+//     text: 'Podcasts 🎙️'
+//   }
+// ]
 
 function App() {
-  const [items, setItems] = useState(INITIAL_ITEMS);
+  const [items, setItems] = useState<Item[]>([]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
