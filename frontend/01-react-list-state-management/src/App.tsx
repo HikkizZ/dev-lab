@@ -63,7 +63,7 @@ function App() {
         <h1>React List State Management - Technical Test</h1>
         <h2>Add and Remove Items</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} aria-label='Add items to the list'>
           <label>
             New Item:
             <input
