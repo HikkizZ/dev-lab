@@ -79,21 +79,28 @@ function App() {
 
       <section>
         <h2>Item List</h2>
-        <ul>
-          {/* Here go the list items */}
-          {
-            items.map((item) => {
-              return (
-                <li key={item.id}>
-                  {item.text}
-                  <button onClick={createHandleRemoveItem(item.id)}>
-                    Remove
-                  </button>
-                </li>
-              )
-            })
-          }
-        </ul>
+
+        {/* Here go the list items */}
+        {
+          items.length === 0 ? (
+            <p>
+              <strong>No items available</strong>
+            </p>
+          ) : (
+            <ul> {
+              items.map((item) => {
+                return (
+                  <li key={item.id}>
+                    {item.text}
+                    <button onClick={createHandleRemoveItem(item.id)}>
+                      Remove
+                    </button>
+                  </li>
+                )
+              })}
+            </ul>
+          )
+        }
       </section>
     </main>
   )
