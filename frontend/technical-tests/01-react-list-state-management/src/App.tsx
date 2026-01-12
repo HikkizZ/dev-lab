@@ -1,7 +1,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Item } from "./components/Items"
+import { Item } from "./components/Item"
 import "./App.css"
 
 export type ItemId = `${string}-${string}-${string}-${string}-${string}`
@@ -75,9 +75,9 @@ function App() {
           <ul>
             {items.map((item) => {
               return <Item
-              {...item}
-              handleClick={createHandleRemoveItem(item.id)}
-              key={item.id} />
+                {...item}
+                handleClick={createHandleRemoveItem(item.id)}
+                key={item.id} />
             })}
           </ul>
         )}
