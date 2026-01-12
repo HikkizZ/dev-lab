@@ -1,9 +1,10 @@
 import type React from "react"
 
 import { useState } from "react"
+import { Item } from "./components/Items"
 import "./App.css"
 
-type ItemId = `${string}-${string}-${string}-${string}-${string}`
+export type ItemId = `${string}-${string}-${string}-${string}-${string}`
 interface Item {
   id: ItemId
   timestamp: number
@@ -72,18 +73,12 @@ function App() {
           </div>
         ) : (
           <ul>
-            {items.map((item) => (
-              <li key={item.id}>
-                <span className="item-text">{item.text}</span>
-                <button
-                  className="remove-btn"
-                  onClick={createHandleRemoveItem(item.id)}
-                  aria-label={`Eliminar ${item.text}`}
-                >
-                  Eliminar
-                </button>
-              </li>
-            ))}
+            {items.map((item) => {
+              return <Item
+              {...item}
+              handleClick={createHandleRemoveItem(item.id)}
+              key={item.id} />
+            })}
           </ul>
         )}
       </section>
