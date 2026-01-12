@@ -1,8 +1,6 @@
-import type { ItemId } from "../App";
-
-export function Item({ id, text, handleClick }: { id: ItemId, text: string, handleClick: () => void }) {
+export function Item({ text, handleClick }: { text: string, handleClick: () => void }) {
     return (
-        <li key={id}>
+        <li>
             <span className="item-text">{text}</span>
             <button
                 className="remove-btn"

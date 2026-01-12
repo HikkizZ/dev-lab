@@ -1,18 +1,16 @@
-import type React from "react"
-
-import { useState } from "react"
 import { Item } from "./components/Item"
 import "./App.css"
+import { useItems } from "./hooks/useItems"
 
 export type ItemId = `${string}-${string}-${string}-${string}-${string}`
-interface Item {
+export interface Item {
   id: ItemId
   timestamp: number
   text: string
 }
 
 function App() {
-  const [items, setItems] = useState<Item[]>([])
+  const { items, addItem, removeItem } = useItems()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -23,23 +21,13 @@ function App() {
     const isInput = input instanceof HTMLInputElement
     if (!isInput || input == null) return
 
-    const newItem: Item = {
-      id: crypto.randomUUID(),
-      timestamp: Date.now(),
-      text: input.value,
-    }
-
-    setItems((prevItems) => {
-      return [...prevItems, newItem]
-    })
+    addItem(input.value)
 
     input.value = ""
   }
 
   const createHandleRemoveItem = (id: ItemId) => () => {
-    setItems((prevItems) => {
-      return prevItems.filter((currentItem) => currentItem.id !== id)
-    })
+    removeItem(id)
   }
 
   return (
