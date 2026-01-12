@@ -33,14 +33,23 @@ Implement a React application that:
 
 The solution focuses on simplicity and clarity:
 
-- Local component state is used to manage the list of items
-- Controlled input is implemented to handle user text entry
+- Local state is managed through a custom React hook (`useItems`)
+- Uncontrolled input handled via form submission and DOM access
 - Event handlers are clearly separated for:
   - Adding new items
   - Removing existing items
 - Immutable state updates are applied to ensure predictable behavior
 
 No external state management libraries are used, as the problem scope does not justify additional abstraction.
+
+---
+
+## Architecture Notes
+
+- Business logic is encapsulated in custom hooks:
+  - `useItems` handles list state and mutations
+  - `useSEO` manages document metadata as a side effect
+- Presentational components remain stateless and focused on UI
 
 ---
 
@@ -96,7 +105,7 @@ http://localhost:5173
 
 ## Notes
 
-- The project intentionally avoids unnecessary abstractions or libraries.
+- The project avoids unnecessary third-party abstractions while using lightweight custom hooks where they improve clarity and separation of concerns
 - Styling is kept minimal to focus on behavior and usability.
 - This repository is part of a broader Dev Lab workspace, where each project serves a clear technical or evaluative purpose.
 
