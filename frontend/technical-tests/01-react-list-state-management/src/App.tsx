@@ -1,6 +1,7 @@
 import { Item } from "./components/Item"
 import "./App.css"
 import { useItems } from "./hooks/useItems"
+import { useSEO } from "./hooks/useSEO"
 
 export type ItemId = `${string}-${string}-${string}-${string}-${string}`
 export interface Item {
@@ -11,6 +12,11 @@ export interface Item {
 
 function App() {
   const { items, addItem, removeItem } = useItems()
+
+  useSEO({
+    title: `[${items.length}] Gestión de Lista - React App`,
+    description: "Añadir y eliminar elementos de una lista",
+  })
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
