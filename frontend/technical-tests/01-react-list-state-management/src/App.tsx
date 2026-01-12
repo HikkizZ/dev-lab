@@ -1,106 +1,91 @@
-import { useState } from 'react'
-import './App.css'
+import type React from "react"
 
-type ItemId = `${string}-${string}-${string}-${string}-${string}`;
+import { useState } from "react"
+import "./App.css"
+
+type ItemId = `${string}-${string}-${string}-${string}-${string}`
 interface Item {
-  id: ItemId;
-  timestamp: number;
-  text: string;
+  id: ItemId
+  timestamp: number
+  text: string
 }
 
-// const INITIAL_ITEMS = [
-//   {
-//     id: crypto.randomUUID(),
-//     timestamp: Date.now(),
-//     text: 'VideoGames 🎮'
-//   },
-//   {
-//     id: crypto.randomUUID(),
-//     timestamp: Date.now(),
-//     text: 'Music 🎵'
-//   },
-//   {
-//     id: crypto.randomUUID(),
-//     timestamp: Date.now(),
-//     text: 'Podcasts 🎙️'
-//   }
-// ]
-
 function App() {
-  const [items, setItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<Item[]>([])
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
 
     const { elements } = event.currentTarget
 
-    const input = elements.namedItem('item')
-    const isInput = input instanceof HTMLInputElement;
-    if (!isInput || input == null) return;
+    const input = elements.namedItem("item")
+    const isInput = input instanceof HTMLInputElement
+    if (!isInput || input == null) return
 
     const newItem: Item = {
       id: crypto.randomUUID(),
       timestamp: Date.now(),
-      text: input.value
+      text: input.value,
     }
 
     setItems((prevItems) => {
-      return [...prevItems, newItem];
-    });
+      return [...prevItems, newItem]
+    })
 
-    input.value = '';
+    input.value = ""
   }
 
   const createHandleRemoveItem = (id: ItemId) => () => {
     setItems((prevItems) => {
-      return prevItems.filter(currentItem => currentItem.id !== id)
+      return prevItems.filter((currentItem) => currentItem.id !== id)
     })
   }
 
   return (
     <main>
       <aside>
-        <h1>React List State Management - Technical Test</h1>
-        <h2>Add and Remove Items</h2>
+        <div className="header-section">
+          <h1>Gestión de Lista</h1>
+          <h2>Añade y elimina elementos de forma sencilla</h2>
+        </div>
 
-        <form onSubmit={handleSubmit} aria-label='Add items to the list'>
-          <label>
-            New Item:
-            <input
-              name='item'
-              required
-              type='text'
-              placeholder='VideoGames 🎮'
-            />
-          </label>
-          <button type='submit'>Añadir elemento a la lista</button>
+        <form onSubmit={handleSubmit} aria-label="Añadir elementos a la lista">
+          <label htmlFor="item-input">Nuevo elemento</label>
+          <input id="item-input" name="item" required type="text" placeholder="Escribe algo... 🎮" autoComplete="off" />
+          <button type="submit">
+            <span>✨</span> Añadir a la lista
+          </button>
         </form>
       </aside>
 
       <section>
-        <h2>Item List</h2>
+        <h2>
+          Lista de elementos
+          {items.length > 0 && <span className="item-count">{items.length}</span>}
+        </h2>
 
-        {/* Here go the list items */}
-        {
-          items.length === 0 ? (
-            <p>
-              <strong>No items available</strong>
-            </p>
-          ) : (
-            <ul> {
-              items.map((item) => {
-                return (
-                  <li key={item.id}>
-                    {item.text}
-                    <button onClick={createHandleRemoveItem(item.id)}>
-                      Remove
-                    </button>
-                  </li>
-                )
-              })}
-            </ul>
-          )
-        }
+        {items.length === 0 ? (
+          <div className="empty-state">
+            <div className="empty-state-icon">📝</div>
+            <strong>No hay elementos todavía</strong>
+            <p>Añade tu primer elemento usando el formulario</p>
+          </div>
+        ) : (
+          <ul>
+            {items.map((item) => (
+              <li key={item.id}>
+                <span className="item-text">{item.text}</span>
+                <button
+                  className="remove-btn"
+                  onClick={createHandleRemoveItem(item.id)}
+                  aria-label={`Eliminar ${item.text}`}
+                >
+                  Eliminar
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
     </main>
   )
