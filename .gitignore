@@ -28,3 +28,6 @@ Thumbs.db
 
 # pm2
 pm2.log
+
+# uploads
+uploads/
