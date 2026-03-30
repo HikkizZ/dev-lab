@@ -22,7 +22,7 @@ Provide a transparent view of how problems are approached, not only their final 
 
 The repository is organized by domain and purpose, not by technology alone.
 
-´´´
+```bash
 dev-lab/
 ├── backend/
 │   ├── technical-tests/
@@ -55,8 +55,7 @@ dev-lab/
 │   └── references/
 │
 └── README.md
-
-´´´
+```
 
 This structure allows the repository to grow organically while remaining easy to navigate for reviewers and collaborators.
 
